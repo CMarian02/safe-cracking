@@ -3,13 +3,11 @@ QMainWindow{
 }
 
 QLabel#frame_dial{
-    image: url(img/dial-frame.png);
     background:transparent;
 }
 
 QLabel#dial{
-    image: url(img/dial.png);
-    background: transparent;
+    background:transparent;
 }
 
 QSlider#slide-zone{
