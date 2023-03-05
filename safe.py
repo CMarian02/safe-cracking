@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
         #Frame Dial
 
         self.frame_dial = QtWidgets.QLabel(self.centralwidget)
-        self.frame_dial.setGeometry(QtCore.QRect(150, 50, 500, 440))
+        self.frame_dial.setGeometry(QtCore.QRect(150, 50, 550, 440))
         self.frame_dial.setText("")
         self.frame_dial.setObjectName("frame_dial")
         pixmap = QtGui.QPixmap("img/dial-frame.png")
@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
         
         self.dial = QtWidgets.QLabel(self.centralwidget)
         self.dialphoto = QtGui.QPixmap("img/dial.png")
-        self.dial.setGeometry(QtCore.QRect(150, 50, 500, 440))
+        self.dial.setGeometry(QtCore.QRect(150, 50, 550, 440))
         self.dial.setText("")
         self.dial.setObjectName("dial")
         self.dial.setAlignment(QtCore.Qt.AlignCenter)
@@ -71,19 +71,9 @@ class Ui_MainWindow(object):
         
         if value > last_value:
             pixmap = QtGui.QPixmap('img/dial.png')
-            center = QtCore.QPoint(int(pixmap.width()/2), int(pixmap.height()/2))
             self.unghi = (self.unghi + 1) % 360
-            transform = QtGui.QTransform().translate(center.x(), center.y()).rotate(self.unghi).translate(-center.x(), -center.y())
+            transform = QtGui.QTransform().rotate(self.unghi)
             pixmap = pixmap.transformed(transform, QtCore.Qt.SmoothTransformation)
-            pixmap = pixmap.scaled(pixmap.width(), pixmap.height(), QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation)
-            print(pixmap.size())
-            pixmap_width = pixmap.width()
-            pixmap_height = pixmap.height()
-            dial_width = self.dial.width()
-            dial_height = self.dial.height()
-            pixmap_x = (dial_width - pixmap_width) / 2
-            pixmap_y = (dial_height - pixmap_height) / 2
-            self.dial.setGeometry(int(pixmap_x), int(pixmap_y), int(pixmap_width), int(pixmap_height))
             self.dial.setPixmap(pixmap)
         else:
             pixmap = QtGui.QPixmap('img/dial.png')
