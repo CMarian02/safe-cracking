@@ -1,0 +1,19 @@
+QMainWindow{
+    background: url(img/background.jpg)
+}
+
+QLabel#frame_dial{
+    background:transparent;
+}
+
+QLabel#dial{
+    background:transparent;
+}
+
+QSlider#slide-zone{
+    background: transparent;
+}
+
+/*QSlider#slide-zone::groove:horizontal{
+    
+}

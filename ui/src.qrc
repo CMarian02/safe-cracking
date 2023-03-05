@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>dial-frame.png</file>
+  </qresource>
+  <qresource prefix="newPrefix">
+    <file>dial.png</file>
+  </qresource>
+</RCC>
