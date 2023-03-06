@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from random import randint
+import playsound
 
 class Slider(QtWidgets.QSlider):
     def mousePressEvent(self, event):
@@ -84,13 +85,14 @@ class Ui_MainWindow(object):
         
         if value > last_value:
             pixmap = QtGui.QPixmap('img/dial.png')
-            self.unghi = (self.unghi + 1) % 360
+            self.unghi = (self.unghi - 1) % 360
             transform = QtGui.QTransform().rotate(self.unghi)
             pixmap = pixmap.transformed(transform, QtCore.Qt.SmoothTransformation)
             self.dial.setPixmap(pixmap)
+            #playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/rotate_dial.mp3")
         else:
             pixmap = QtGui.QPixmap('img/dial.png')
-            self.unghi = (self.unghi - 1) % 360
+            self.unghi = (self.unghi + 1) % 360
             transform = QtGui.QTransform().rotate(self.unghi)
             pixmap = pixmap.transformed(transform, QtCore.Qt.SmoothTransformation)
             self.dial.setPixmap(pixmap)
@@ -99,12 +101,15 @@ class Ui_MainWindow(object):
                 
         if value == self.st_value and step == 0:
             self.timer.setInterval(3000)
+            print('here')
             self.timer.start()
         elif value == self.nd_value and step == 1:
             self.timer.setInterval(4000)
+            print('here')
             self.timer.start()
         elif value == self.rd_value and step == 2:
             self.timer.setInterval(5000)
+            print('here')
             self.timer.start()
 
 
@@ -120,14 +125,17 @@ class Ui_MainWindow(object):
             if value == self.st_value and step == 0:
                 self.timer.stop()
                 print('done 3 secs')
+                playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/safe_click.mp3")
                 step += 1
             elif value == self.nd_value and step == 1:
                 self.timer.stop()
+                playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/safe_clickl.mp3")
                 print('done 4 secs')
                 step += 1
             elif value == self.rd_value and step == 2:
                 self.timer.stop()
                 print('done 5 secs')
+                playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/broke_safe.mp3")
                 step += 1
                 print('You Broke Safe! Good Job!')
 
