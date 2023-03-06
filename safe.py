@@ -1,5 +1,4 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QGraphicsScene, QGraphicsPixmapItem, QGraphicsView
 from random import randint
 
 
@@ -51,11 +50,17 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         
+        #Timer
+
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.check_slider_time)
+
+
         global step,value
         step = 0
         value = 170
-
         self.unghi = 0
+        valid = False
 
 
         print(self.st_value)
@@ -67,6 +72,7 @@ class Ui_MainWindow(object):
         global step, value
         last_value = value
         value = self.slider.value()
+        print(value)
         # Rotate Dial
         
         if value > last_value:
@@ -83,15 +89,16 @@ class Ui_MainWindow(object):
             self.dial.setPixmap(pixmap)
 
         # Verify values
-
+                
         if value == self.st_value and step == 0:
-            print('you go to 2nd')
-            step += 1
+            self.timer.setInterval(3000)
+            self.timer.start()
         elif value == self.nd_value and step == 1:
-            print('you can go 3rd')
-            step += 1
+            self.timer.setInterval(4000)
+            self.timer.start()
         elif value == self.rd_value and step == 2:
-            print('you broke it.')
+            self.timer.setInterval(5000)
+            self.timer.start()
 
 
     def retranslateUi(self, MainWindow):
@@ -99,6 +106,23 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "SafeCracker"))
     
             
+    def check_slider_time(self):
+            
+            global step
+
+            if value == self.st_value and step == 0:
+                self.timer.stop()
+                print('done 3 secs')
+                step += 1
+            elif value == self.nd_value and step == 1:
+                self.timer.stop()
+                print('done 4 secs')
+                step += 1
+            elif value == self.rd_value and step == 2:
+                self.timer.stop()
+                print('done 5 secs')
+                step += 1
+                print('You Broke Safe! Good Job!')
 
 
 if __name__ == "__main__":
