@@ -1,6 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from random import randint
 
+class Slider(QtWidgets.QSlider):
+    def mousePressEvent(self, event):
+        event.ignore()
+    def wheelEvent(self, event):
+        event.ignore()
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -39,13 +44,15 @@ class Ui_MainWindow(object):
 
         #Slider
 
-        self.slider = QtWidgets.QSlider(self.centralwidget)
+        self.slider = Slider(self.centralwidget)
         self.slider.setGeometry(QtCore.QRect(130, 175, 591, 250))
         self.slider.setOrientation(QtCore.Qt.Horizontal)
         self.slider.setObjectName("slide-zone")
         self.slider.setRange(0, 360)
         self.slider.setValue(184)
         self.slider.valueChanged.connect(self.val_changed)
+
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -55,12 +62,12 @@ class Ui_MainWindow(object):
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.check_slider_time)
 
+        #Global Variables
 
         global step,value
         step = 0
-        value = 170
+        value = 184
         self.unghi = 0
-        valid = False
 
 
         print(self.st_value)
