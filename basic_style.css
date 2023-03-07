@@ -17,3 +17,17 @@ QSlider#slide-zone{
 QSlider#slide-zone::groove:horizontal{
     background:transparent;
 }
+
+QProgressBar{
+    border: 2px solid #5f085f;
+    border-radius: 15px;
+}
+
+QProgressBar::chunk{
+    width: 15px;
+    height: 10px;
+    border-radius: 6px;
+    margin: 0.5px;
+    margin-right: 2px;
+    margin-left: 4px;
+}
