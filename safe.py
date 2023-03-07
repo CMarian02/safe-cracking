@@ -52,16 +52,25 @@ class Ui_MainWindow(object):
         self.slider.setRange(0, 360)
         self.slider.setValue(184)
         self.slider.valueChanged.connect(self.val_changed)
+    
+        #ProgressBar
 
-
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        
+        self.progress = QtWidgets.QProgressBar(self.centralwidget)
+        self.progress.setGeometry(QtCore.QRect(300, 500, 238, 30))
+        self.progress.setValue(0)
+        self.progress.setAlignment(QtCore.Qt.AlignCenter)
+        self.progress.setTextVisible(False)
+    
         #Timer
 
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.check_slider_time)
+
+        #MainWindow
+
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         #Global Variables
 
@@ -70,17 +79,14 @@ class Ui_MainWindow(object):
         value = 184
         self.unghi = 0
 
-
-        print(self.st_value)
-        print(self.nd_value)
-        print(self.rd_value)
+    #Functions for Slider
 
     def val_changed(self):
 
         global step, value
         last_value = value
         value = self.slider.value()
-        print(value)
+
         # Rotate Dial
         
         if value > last_value:
@@ -111,13 +117,54 @@ class Ui_MainWindow(object):
             self.timer.setInterval(5000)
             print('here')
             self.timer.start()
+        
+        #Change ProgressBar procent
+
+        if step == 0:
+            self.check_progress(value, self.st_value)
+        elif step == 1:
+            self.check_progress(value, self.nd_value)
+        elif step == 2:
+            self.check_progress(value, self.rd_value)
+
+    #Create ProgressBar chunks
+
+    def check_progress(self, value, step):
+        if (step - value) > 250 and (self.st_value - value) <= 360 or ((value - step) > 250 and (value - step) <= 360):
+            self.progress.setValue(0)
+        elif (step - value) > 150 and (step - value) <= 250 or ((value - step) > 150 and (value - step) <= 250):
+            self.progress.setValue(20)
+            self.progress.setStyleSheet('''QProgressBar::chunk{
+            background-color:green;
+            }''')
+        elif (step - value) > 50 and (step - value) <= 150 or ((value - step) > 50 and (value - step) <= 150):
+            self.progress.setValue(40)
+            self.progress.setStyleSheet('''QProgressBar::chunk{
+            background-color:yellow;
+            }''')
+        elif (step - value) > 10 and (step - value) <= 50 or ((value - step) > 10 and (value - step) <= 50):
+            self.progress.setValue(60)
+            self.progress.setStyleSheet('''QProgressBar::chunk{
+            background-color:orange╚;
+            }''')
+        elif (step - value) > 5 and (step - value) <= 10 or ((value - step) > 5 and (value - step) <= 10):
+            self.progress.setValue(80)
+            self.progress.setStyleSheet('''QProgressBar::chunk{
+            background-color:orange;
+            }''')
+        elif (step - value) >= 0 and (step - value) <= 5 or ((value -step) >= 0 and (value - step) <= 5):
+            self.progress.setValue(100)
+            self.progress.setStyleSheet('''QProgressBar::chunk{
+            background-color:red;
+            }''')
 
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "SafeCracker"))
     
-            
+    #Check if slider stay on good value for 3 sec
+
     def check_slider_time(self):
             
             global step
@@ -127,11 +174,13 @@ class Ui_MainWindow(object):
                 print('done 3 secs')
                 playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/safe_click.mp3")
                 step += 1
+                self.check_progress(value, self.nd_value)
             elif value == self.nd_value and step == 1:
                 self.timer.stop()
                 playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/safe_clickl.mp3")
                 print('done 4 secs')
                 step += 1
+                self.check_progress(value, self.rd_value)
             elif value == self.rd_value and step == 2:
                 self.timer.stop()
                 print('done 5 secs')
