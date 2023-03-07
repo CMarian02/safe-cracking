@@ -8,12 +8,20 @@ class Slider(QtWidgets.QSlider):
     def wheelEvent(self, event):
         event.ignore()
 
+class WinFrame(QtWidgets.QDialog):
+    def __init__(self):
+        super().__init__()
+        self.win_label = QtWidgets.QLabel(self)
+        self.win_label.setText('You broke safe! Congrats!')
+        self.win_label.resize(200, 50)
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(920, 620)
         MainWindow.setMinimumSize(QtCore.QSize(920, 620))
         MainWindow.setMaximumSize(QtCore.QSize(920, 620))
+        MainWindow.setWindowIcon(QtGui.QIcon("img/safe-dial.png"))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         
@@ -65,6 +73,10 @@ class Ui_MainWindow(object):
 
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.check_slider_time)
+
+        #WinFrame
+
+        self.winframe = QtWidgets.QFrame(self.centralwidget)
 
         #MainWindow
 
@@ -175,6 +187,7 @@ class Ui_MainWindow(object):
                 playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/safe_click.mp3")
                 step += 1
                 self.check_progress(value, self.nd_value)
+                self.open_frame()
             elif value == self.nd_value and step == 1:
                 self.timer.stop()
                 playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/safe_clickl.mp3")
@@ -188,6 +201,11 @@ class Ui_MainWindow(object):
                 step += 1
                 print('You Broke Safe! Good Job!')
 
+    def open_frame(self):
+        frame = WinFrame()
+        frame.setWindowTitle('You Win')
+        frame.setGeometry(150,50, 550, 440)
+        frame.exec_()
 
 if __name__ == "__main__":
     import sys
