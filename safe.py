@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from random import randint
+from qdialog import WinFrame
 import playsound
 
 class Slider(QtWidgets.QSlider):
@@ -7,18 +8,6 @@ class Slider(QtWidgets.QSlider):
         event.ignore()
     def wheelEvent(self, event):
         event.ignore()
-
-class WinFrame(QtWidgets.QDialog):
-    def __init__(self):
-        super().__init__()
-        self.resize(400, 400)
-        self.setStyleSheet('''
-        background-image: url(img/win-bg.jpg)''')
-        self.win_label = QtWidgets.QLabel(self)
-        self.win_label.setText('You broke safe! Congrats!')
-        self.win_label.resize(400, 200)
-        self.win_label.setAlignment(QtCore.Qt.AlignCenter)
-        
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -186,9 +175,9 @@ class Ui_MainWindow(object):
                 self.timer.stop()
                 print('done 3 secs')
                 playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/safe_click.mp3")
+                self.open_frame()
                 step += 1
                 self.check_progress(value, self.nd_value)
-                self.open_frame()
             elif value == self.nd_value and step == 1:
                 self.timer.stop()
                 playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/safe_clickl.mp3")
@@ -205,7 +194,9 @@ class Ui_MainWindow(object):
     def open_frame(self):
         frame = WinFrame()
         frame.setWindowTitle('You Win')
-        #frame.setGeometry(500, 250, 200, 50)
+        with open('basic_style.css', 'r') as f:
+            stylesheet = f.read()
+        frame.setStyleSheet(stylesheet)
         frame.exec_()
 
 if __name__ == "__main__":
