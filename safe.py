@@ -11,9 +11,14 @@ class Slider(QtWidgets.QSlider):
 class WinFrame(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
+        self.resize(400, 400)
+        self.setStyleSheet('''
+        background-image: url(img/win-bg.jpg)''')
         self.win_label = QtWidgets.QLabel(self)
         self.win_label.setText('You broke safe! Congrats!')
-        self.win_label.resize(200, 50)
+        self.win_label.resize(400, 200)
+        self.win_label.setAlignment(QtCore.Qt.AlignCenter)
+        
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -74,10 +79,6 @@ class Ui_MainWindow(object):
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.check_slider_time)
 
-        #WinFrame
-
-        self.winframe = QtWidgets.QFrame(self.centralwidget)
-
         #MainWindow
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -98,7 +99,7 @@ class Ui_MainWindow(object):
         global step, value
         last_value = value
         value = self.slider.value()
-
+       # self.open_frame()
         # Rotate Dial
         
         if value > last_value:
@@ -204,7 +205,7 @@ class Ui_MainWindow(object):
     def open_frame(self):
         frame = WinFrame()
         frame.setWindowTitle('You Win')
-        frame.setGeometry(150,50, 550, 440)
+        #frame.setGeometry(500, 250, 200, 50)
         frame.exec_()
 
 if __name__ == "__main__":
