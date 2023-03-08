@@ -31,3 +31,44 @@ QProgressBar::chunk{
     margin-right: 2px;
     margin-left: 4px;
 }
+
+QLabel#win-l{
+    color: white;
+    font-family: Bebas Neue;
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+QDialog{
+    /*background-image: url("img/win-bg.jpg") */
+    background: darkslategrey;
+}
+
+QPushButton#R-button{
+    background-color:#127012;
+    color:white;
+    font-family: Bebas Neue;
+    font-size: 15px;
+    letter-spacing: 2px;
+    border-radius:10px;
+}
+
+QPushButton#R-button:hover{
+    background-color:#1a9a1a;
+    color:antiquewhite;
+    border: 1px solid greenyellow;
+}
+
+QPushButton#E-button{
+    background-color:#731a1a;
+    color:white;
+    font-family:Bebas Neue;
+    font-size: 15px;
+    letter-spacing: 2px;
+    border-radius: 10px;
+}
+
+QPushButton#E-button:hover{
+    background-color:#962222;
+    color:antiquewhite;
+    border: 1px solid #d52b2b;
+}
