@@ -12,7 +12,7 @@
 🔴 - if you are between 0 and 5 positions away<br>
 1️⃣ - In order to break the first number, you have to stay in position for 3 seconds, then a specific noise will be heard.<br>
 2️⃣ - In order to break the second number, you have to stay in position for 4 seconds, then a specific noise will be heard.<br>
-3️⃣ - In order to crack the third number, i.e. the safe, you have to stay in position for 5 seconds, then a specific noise will be heard.<br>
+3️⃣ - In order to crack the third number, and the safe, you have to stay in position for 5 seconds, then a specific noise will be heard.<br>
 <b>[🔜]</b> Future implementations in the programme:<br>
 <ul>
 <li>[⏳] - A timer to increase the difficulty.</li>
