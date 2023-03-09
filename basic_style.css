@@ -39,8 +39,7 @@ QLabel#win-l{
     letter-spacing: 2px;
 }
 QDialog{
-    /*background-image: url("img/win-bg.jpg") */
-    background: darkslategrey;
+    background-image: url("img/win-bg.png");
 }
 
 QPushButton#R-button{
