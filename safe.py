@@ -1,7 +1,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
+from PyQt5.QtCore import QUrl
 from random import randint
 from qdialog import WinFrame
 import playsound
+
 
 class Slider(QtWidgets.QSlider):
     def mousePressEvent(self, event):
@@ -68,6 +71,12 @@ class Ui_MainWindow(object):
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.check_slider_time)
 
+        #MediaPlayer
+
+        self.player = QMediaPlayer()
+        self.file_url = QUrl.fromLocalFile('sounds/click.mp3')
+        self.player.setMedia(QMediaContent(self.file_url))
+    
         #MainWindow
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -76,7 +85,8 @@ class Ui_MainWindow(object):
 
         #Global Variables
 
-        global step,value
+        global step, value, click
+        click = 1
         step = 0
         value = 184
         self.unghi = 0
@@ -85,10 +95,9 @@ class Ui_MainWindow(object):
 
     def val_changed(self):
 
-        global step, value
+        global step, value, click
         last_value = value
-        value = self.slider.value()
-       # self.open_frame()
+
         # Rotate Dial
         
         if value > last_value:
@@ -97,13 +106,18 @@ class Ui_MainWindow(object):
             transform = QtGui.QTransform().rotate(self.unghi)
             pixmap = pixmap.transformed(transform, QtCore.Qt.SmoothTransformation)
             self.dial.setPixmap(pixmap)
-            #playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/rotate_dial.mp3")
+            if click % 2 == 0 and value != [self.st_value, self.nd_value, self.rd_value]:
+                self.player.play()
+            click += 1
         else:
             pixmap = QtGui.QPixmap('img/dial.png')
             self.unghi = (self.unghi + 1) % 360
             transform = QtGui.QTransform().rotate(self.unghi)
             pixmap = pixmap.transformed(transform, QtCore.Qt.SmoothTransformation)
             self.dial.setPixmap(pixmap)
+            if click % 2 == 0 and value != [self.st_value, self.nd_value, self.rd_value]:
+                self.player.play()
+            click +=1
 
         # Verify values
                 
