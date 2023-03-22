@@ -76,6 +76,9 @@ class Ui_MainWindow(object):
         self.player = QMediaPlayer()
         self.file_url = QUrl.fromLocalFile('sounds/click.mp3')
         self.player.setMedia(QMediaContent(self.file_url))
+        self.player_2 = QMediaPlayer()
+        self.file_url_2 = QUrl.fromLocalFile('sounds/point_click.mp3')
+        self.player_2.setMedia(QMediaContent(self.file_url_2))
     
         #MainWindow
 
@@ -123,14 +126,17 @@ class Ui_MainWindow(object):
         # Verify values
                 
         if value == self.st_value and step == 0:
+            self.player_2.play()
             self.timer.setInterval(3000)
             print('here')
             self.timer.start()
         elif value == self.nd_value and step == 1:
+            self.player_2.play()
             self.timer.setInterval(4000)
             print('here')
             self.timer.start()
         elif value == self.rd_value and step == 2:
+            self.player_2.play()
             self.timer.setInterval(5000)
             print('here')
             self.timer.start()
