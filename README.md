@@ -18,4 +18,6 @@
 <li>[⏳] - A timer to increase the difficulty.</li>
 <li>[🧠] - Possibility to choose a difficulty</li>
 <li>[▶] - New animations when finding the specific number to crack the safe.</li></ul></p>
+<b><p align = "center">Short Presentation Video:</p></b><br>
+<p align = "center"> https://youtu.be/UMR3mWsgUD8</p><br>
 <p align = "center"><b>[⚠]The project is currently being updated![⚠]</b></p>
