@@ -98,6 +98,8 @@ class Ui_MainWindow(object):
         global step, value, click
         last_value = value
         value = self.slider.value()
+        print(value)
+        print(self.st_value, self.nd_value, self.rd_value)
 
         # Rotate Dial
         
@@ -147,7 +149,7 @@ class Ui_MainWindow(object):
     #Create ProgressBar chunks
 
     def check_progress(self, value, step):
-        if (step - value) > 250 and (self.st_value - value) <= 360 or ((value - step) > 250 and (value - step) <= 360):
+        if (step - value) > 250 and (step - value) <= 360 or ((value - step) > 250 and (value - step) <= 360):
             self.progress.setValue(0)
         elif (step - value) > 150 and (step - value) <= 250 or ((value - step) > 150 and (value - step) <= 250):
             self.progress.setValue(20)
