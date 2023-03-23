@@ -76,6 +76,9 @@ class Ui_MainWindow(object):
         self.player = QMediaPlayer()
         self.file_url = QUrl.fromLocalFile('sounds/click.mp3')
         self.player.setMedia(QMediaContent(self.file_url))
+        self.player_2 = QMediaPlayer()
+        self.file_url_2 = QUrl.fromLocalFile('sounds/point_click.mp3')
+        self.player_2.setMedia(QMediaContent(self.file_url_2))
     
         #MainWindow
 
@@ -125,14 +128,17 @@ class Ui_MainWindow(object):
         # Verify values
                 
         if value == self.st_value and step == 0:
+            self.player_2.play()
             self.timer.setInterval(3000)
             print('here')
             self.timer.start()
         elif value == self.nd_value and step == 1:
+            self.player_2.play()
             self.timer.setInterval(4000)
             print('here')
             self.timer.start()
         elif value == self.rd_value and step == 2:
+            self.player_2.play()
             self.timer.setInterval(5000)
             print('here')
             self.timer.start()
@@ -191,19 +197,19 @@ class Ui_MainWindow(object):
             if value == self.st_value and step == 0:
                 self.timer.stop()
                 print('done 3 secs')
-                playsound.playsound("C:/Users/gamer/OneDrive/Desktop/Projects/safe-cracking/sounds/safe_click.mp3")
+                playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/safe_click.mp3")
                 step += 1
                 self.check_progress(value, self.nd_value)
             elif value == self.nd_value and step == 1:
                 self.timer.stop()
-                playsound.playsound("C:/Users/gamer/OneDrive/Desktop/Projects/safe-cracking/sounds/safe_clickl.mp3")
+                playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/safe_clickl.mp3")
                 print('done 4 secs')
                 step += 1
                 self.check_progress(value, self.rd_value)
             elif value == self.rd_value and step == 2:
                 self.timer.stop()
                 print('done 5 secs')
-                playsound.playsound("C:/Users/gamer/OneDrive/Desktop/Projects/safe-cracking/sounds/broke_safe.mp3")
+                playsound.playsound("C:/Users/gamer/Desktop/Project/safe-crack/sounds/broke_safe.mp3")
                 step += 1
                 self.open_frame()
                 print('You Broke Safe! Good Job!')
